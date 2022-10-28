@@ -35,7 +35,7 @@ use({
 
 ## ⚙️ Configuration
 
-**noice.nvim** comes with the following defaults:
+**drop.nvim** comes with the following defaults:
 
 ```lua
 {
