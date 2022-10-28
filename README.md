@@ -2,7 +2,7 @@
 
 Fun little plugin that can be used as a screensaver and on your dashboard.
 
-https://user-images.githubusercontent.com/292349/198695517-c834a9c5-8acc-4a47-9f1d-277085169754.mp4
+[drop.webm](https://user-images.githubusercontent.com/292349/198708737-a1d2d24a-1faa-40f1-9c6d-ca13c60290b7.webm)
 
 ## Features
 
