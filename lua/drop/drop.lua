@@ -13,10 +13,11 @@ M.timer = nil
 ---@field col integer
 ---@field win? integer
 ---@field buf? integer
+---@field hidden boolean
+---@field speed integer
 local Drop = {}
 Drop.__index = Drop
 
-Drop._id = 1
 ---@type table<integer, Drop>
 Drop.drops = {}
 
@@ -26,8 +27,6 @@ function Drop.new()
   local symbols = theme.symbols
   local colors = vim.tbl_keys(theme.colors)
 
-  Drop._id = Drop._id + 1
-  self.id = Drop._id
   self.symbol = symbols[math.random(1, #symbols)]
   self.hl_group = "Drop" .. math.random(1, #colors) .. (math.random(1, 3) == 1 and "Bold" or "")
   self.row = 0
@@ -35,15 +34,13 @@ function Drop.new()
   self.win = nil
   self.buf = nil
   self.speed = math.random(1, 2)
-  Drop.drops[self.id] = self
+  self.hidden = false
   return self
 end
 
 function Drop:show()
   if not self.win then
     self.buf = vim.api.nvim_create_buf(false, true)
-    vim.bo[self.buf].filetype = "drop"
-    vim.api.nvim_buf_set_name(self.buf, "")
     vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, { self.symbol })
     self.win = vim.api.nvim_open_win(self.buf, false, {
       relative = "editor",
@@ -57,8 +54,6 @@ function Drop:show()
       noautocmd = true,
     })
     vim.wo[self.win].winhighlight = "NormalFloat:" .. self.hl_group
-  elseif not vim.api.nvim_win_is_valid(self.win) then
-    self:hide()
   else
     vim.api.nvim_win_set_config(self.win, {
       relative = "editor",
@@ -69,11 +64,11 @@ function Drop:show()
 end
 
 function Drop:hide()
+  self.hidden = true
   if self.win then
     pcall(vim.api.nvim_win_close, self.win, true)
     pcall(vim.api.nvim_buf_delete, self.buf, { force = true })
   end
-  Drop.drops[self.id] = nil
 end
 
 function Drop:is_visible()
@@ -90,35 +85,39 @@ function Drop:update()
   else
     self:hide()
   end
+  return not self.hidden
 end
+
+M.ticks = 0
 
 function M.show()
   if M.timer then
     return
   end
-  local target = config.options.max
-  local ticks = 0
-  M.timer = vim.loop.new_timer()
-  M.timer:start(
-    0,
-    config.options.interval,
-    vim.schedule_wrap(function()
-      if M.timer == nil then
-        return
-      end
-      ticks = ticks + 1
-      local count = vim.tbl_count(Drop.drops)
-      local pct = math.min(vim.go.lines, ticks) / vim.go.lines
-      local _target = pct * target
-      while count < _target * math.random(80, 100) / 100 do
-        count = count + 1
-        Drop.new()
-      end
-      for _, drop in pairs(Drop.drops) do
-        drop:update()
-      end
-    end)
+  M.ticks = 0
+  M.timer = vim.defer_fn(M.update, config.options.interval)
+end
+
+function M.update()
+  if M.timer == nil then
+    return
+  end
+  M.ticks = M.ticks + 1
+  local pct = math.min(vim.go.lines, M.ticks) / vim.go.lines
+  local _target = pct * config.options.max
+  vim.go.lazyredraw = true
+  while #Drop.drops < _target * math.random(80, 100) / 100 do
+    table.insert(Drop.drops, Drop.new())
+  end
+  Drop.drops = vim.tbl_filter(
+    ---@param drop Drop
+    function(drop)
+      return drop:update()
+    end,
+    Drop.drops
   )
+  vim.go.lazyredraw = false
+  M.timer = vim.defer_fn(M.update, config.options.interval)
 end
 
 function M.hide()
@@ -127,9 +126,10 @@ function M.hide()
   end
   M.timer:stop()
   M.timer = nil
-  for _, drop in pairs(Drop.drops) do
+  for _, drop in ipairs(Drop.drops) do
     drop:hide()
   end
+  Drop.drops = {}
 end
 
 return M
