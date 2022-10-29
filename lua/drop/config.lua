@@ -19,6 +19,16 @@ M.defaults = {
 
 ---@type table<string,DropTheme>
 M.themes = {
+  stars = {
+    symbols = { "★", "⭐", "✮", "✦", "✬", "✯" },
+    colors = {
+      "#ffd27d",
+      "#ffa371",
+      "#a6a8ff",
+      "#fffa86",
+      "#a87bff",
+    },
+  },
   leaves = {
     symbols = { "🍂", "🍁", "🍀", "🌿", " ", " ", " " },
     colors = {

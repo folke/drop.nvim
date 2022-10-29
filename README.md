@@ -11,7 +11,7 @@ Fun little plugin that can be used as a screensaver and on your dashboard.
   - [alpha-nvim](https://github.com/goolord/alpha-nvim)
   - [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - runs as a screen saver when no there is no activity for a specified amount of time
-- currently, two themes available: `"leaves"` & `"snow"`
+- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`
 
 ## ⚡️ Requirements
 
