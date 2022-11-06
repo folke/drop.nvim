@@ -81,7 +81,7 @@ function M.show()
     width = vim.go.columns,
     height = vim.go.lines,
     focusable = false,
-    zindex = 1000,
+    zindex = 10,
     style = "minimal",
     noautocmd = true,
   })
