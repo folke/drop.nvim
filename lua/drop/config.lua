@@ -68,10 +68,14 @@ function M.sleep()
   if not M.timer then
     M.timer = vim.loop.new_timer()
   end
-  M.timer:start(M.options.screensaver, 0, function()
-    M.screensaver = true
-    require("drop").show()
-  end)
+  M.timer:start(
+    M.options.screensaver,
+    0,
+    vim.schedule_wrap(function()
+      M.screensaver = true
+      require("drop").show()
+    end)
+  )
 end
 
 function M.setup(opts)
