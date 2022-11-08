@@ -48,7 +48,7 @@ function Drop:show()
 end
 
 function Drop:is_visible()
-  return self.col >= 0 and self.col <= vim.go.columns and self.row < vim.go.lines
+  return self.col >= 0 and (self.col <= vim.go.columns - vim.fn.strwidth(self.symbol)) and self.row < vim.go.lines
 end
 
 function Drop:update()
