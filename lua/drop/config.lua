@@ -11,11 +11,11 @@ local M = {}
 M.defaults = {
   ---@type DropTheme|string
   theme = "leaves", -- can be one of rhe default themes, or a custom theme
-  max = 50, -- maximum number of drops on the screen
+  max = 75, -- maximum number of drops on the screen
   interval = 150, -- every 150ms we update the drops
   screensaver = 1000 * 60 * 5, -- show after 5 minutes. Set to false, to disable
   filetypes = { "dashboard", "alpha", "starter" }, -- will enable/disable automatically for the following filetypes
-  winblend = 70, -- winblend for the drop window
+  winblend = 100, -- winblend for the drop window
 }
 
 M.ns = vim.api.nvim_create_namespace("drop")
@@ -132,12 +132,12 @@ function M.get_theme()
 end
 
 function M.colors()
-  vim.api.nvim_set_hl(0, "Drop", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "Drop", { bg = "NONE", nocombine = true })
   local theme = M.get_theme()
   for i, color in ipairs(theme.colors) do
     local hl_group = "Drop" .. i
-    vim.api.nvim_set_hl(0, hl_group, { fg = color })
-    vim.api.nvim_set_hl(0, hl_group .. "Bold", { fg = color, bold = true })
+    vim.api.nvim_set_hl(0, hl_group, { fg = color, blend = 0 })
+    vim.api.nvim_set_hl(0, hl_group .. "Bold", { fg = color, bold = true, blend = 0 })
   end
 end
 
