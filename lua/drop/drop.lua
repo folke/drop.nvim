@@ -35,7 +35,7 @@ function Drop:init()
   self.symbol = symbols[math.random(1, #symbols)]
   self.hl_group = "Drop" .. math.random(1, #colors) .. (math.random(1, 3) == 1 and "Bold" or "")
   self.row = 0
-  self.col = math.random(0, vim.go.columns)
+  self.col = math.random(0, vim.go.columns - vim.fn.strwidth(self.symbol))
   self.speed = math.random(1, 2)
 end
 
