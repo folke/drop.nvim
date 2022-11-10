@@ -40,11 +40,17 @@ function Drop:init()
 end
 
 function Drop:show()
-  self.id = vim.api.nvim_buf_set_extmark(self.buf, config.ns, self.row, 0, {
+  -- FIXME: line value outside of range
+  local ok, id = pcall(vim.api.nvim_buf_set_extmark, self.buf, config.ns, self.row, 0, {
     virt_text = { { self.symbol, self.hl_group } },
     virt_text_win_col = self.col,
     id = self.id,
   })
+  if ok then
+    self.id = id
+  else
+    self:init()
+  end
 end
 
 function Drop:is_visible()
