@@ -128,11 +128,12 @@ function M.update()
   for _, drop in ipairs(Drop.drops) do
     drop:update()
   end
+  vim.go.lazyredraw = false
+  vim.cmd.redraw()
   M.timer = vim.defer_fn(M.update, config.options.interval)
 end
 
 function M.hide()
-  vim.go.lazyredraw = false
   if not M.timer then
     return
   end
@@ -140,6 +141,8 @@ function M.hide()
   M.timer = nil
   pcall(vim.api.nvim_win_close, M.win, true)
   pcall(vim.api.nvim_buf_delete, M.buf, { force = true })
+  M.win = nil
+  M.buf = nil
   Drop.drops = {}
 end
 
