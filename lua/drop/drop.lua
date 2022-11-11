@@ -41,7 +41,7 @@ end
 
 function Drop:show()
   -- FIXME: line value outside of range
-  local ok, id = pcall(vim.api.nvim_buf_set_extmark, self.buf, config.ns, self.row, 0, {
+  local ok, id = pcall(vim.api.nvim_buf_set_extmark, self.buf, config.ns, math.floor(self.row), 0, {
     virt_text = { { self.symbol, self.hl_group } },
     virt_text_win_col = self.col,
     id = self.id,
@@ -59,8 +59,10 @@ end
 
 function Drop:update()
   local dx = math.random(0, 2) - 1
-  self.row = self.row + self.speed
-  self.col = self.col + dx
+  self.row = self.row + self.speed * 0.5
+  if math.floor(self.row) == self.row then
+    self.col = self.col + dx
+  end
 
   if not self:is_visible() then
     self:init()
