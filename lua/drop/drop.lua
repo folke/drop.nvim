@@ -91,6 +91,21 @@ function M.show()
     style = "minimal",
     noautocmd = true,
   })
+  vim.api.nvim_create_autocmd("VimResized", {
+    callback = function()
+      if not M.buf then
+        return true
+      end
+      vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, vim.split(string.rep("\n", vim.go.lines), "\n"))
+      vim.api.nvim_win_set_config(M.win, {
+        relative = "editor",
+        row = 0,
+        col = 0,
+        width = vim.go.columns,
+        height = vim.go.lines,
+      })
+    end,
+  })
   vim.wo[M.win].winhighlight = "NormalFloat:Drop"
   vim.wo[M.win].winblend = config.options.winblend
   M.ticks = 0
