@@ -80,6 +80,7 @@ function M.show()
     return
   end
   M.buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[M.buf].bufhidden = "wipe"
   vim.api.nvim_buf_set_lines(M.buf, 0, -1, false, vim.split(string.rep("\n", vim.go.lines), "\n"))
 
   M.win = vim.api.nvim_open_win(M.buf, false, {
@@ -111,7 +112,8 @@ function M.show()
   vim.wo[M.win].winhighlight = "NormalFloat:Drop"
   vim.wo[M.win].winblend = config.options.winblend
   M.ticks = 0
-  M.timer = vim.defer_fn(M.update, config.options.interval)
+  M.timer = vim.loop.new_timer()
+  M.timer:start(0, config.options.interval, vim.schedule_wrap(M.update))
 end
 
 function M.update()
@@ -132,20 +134,25 @@ function M.update()
   end
   vim.go.lazyredraw = false
   vim.cmd.redraw()
-  M.timer = vim.defer_fn(M.update, config.options.interval)
 end
 
 function M.hide()
   if not M.timer then
     return
   end
-  M.timer:stop()
-  M.timer = nil
-  pcall(vim.api.nvim_win_close, M.win, true)
-  pcall(vim.api.nvim_buf_delete, M.buf, { force = true })
-  M.win = nil
-  M.buf = nil
-  Drop.drops = {}
+  vim.schedule(function()
+    if not M.timer then
+      return
+    end
+    M.timer:stop()
+    M.timer = nil
+    print("deleting")
+    pcall(vim.api.nvim_buf_delete, M.buf, { force = true })
+    pcall(vim.api.nvim_win_close, M.win, true)
+    M.win = nil
+    M.buf = nil
+    Drop.drops = {}
+  end)
 end
 
 return M

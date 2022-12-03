@@ -89,6 +89,7 @@ function M.setup(opts)
   if #M.options.filetypes > 0 then
     vim.api.nvim_create_autocmd("FileType", {
       pattern = M.options.filetypes,
+      once = true,
       callback = function(event)
         M.auto(event.buf)
       end,
