@@ -146,7 +146,6 @@ function M.hide()
     end
     M.timer:stop()
     M.timer = nil
-    print("deleting")
     pcall(vim.api.nvim_buf_delete, M.buf, { force = true })
     pcall(vim.api.nvim_win_close, M.win, true)
     M.win = nil
