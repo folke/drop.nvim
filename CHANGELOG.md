@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/folke/drop.nvim/compare/v1.0.0...v1.1.0) (2023-03-12)
+
+
+### Features
+
+* add summer and spring themes ([#11](https://github.com/folke/drop.nvim/issues/11)) ([fa70cb7](https://github.com/folke/drop.nvim/commit/fa70cb79a8c32a531567b59d88a6018c4a04fe6b))
+
 ## 1.0.0 (2023-01-04)
 
 
