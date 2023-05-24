@@ -1,4 +1,4 @@
-*drop.nvim.txt*         For Neovim >= 0.8.0         Last change: 2023 March 19
+*drop.nvim.txt*          For Neovim >= 0.8.0          Last change: 2023 May 24
 
 ==============================================================================
 Table of Contents                                *drop.nvim-table-of-contents*
@@ -20,17 +20,15 @@ drop.webm
 
 FEATURES                                             *drop.nvim-drop-features*
 
-
 - automatically enables/disables on dashboard plugins:
     - mini.starter <https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-starter.md>
     - alpha-nvim <https://github.com/goolord/alpha-nvim>
     - dashboard-nvim <https://github.com/glepnir/dashboard-nvim>
 - runs as a screen saver when no there is no activity for a specified amount of time
-- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`
+- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`, `"xmas"`, `"spring"`, `"summer"`
 
 
 REQUIREMENTS                                     *drop.nvim-drop-requirements*
-
 
 - Neovim >= 0.8.0
 - a Nerd Font <https://www.nerdfonts.com/>
