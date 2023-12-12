@@ -11,7 +11,21 @@ Fun little plugin that can be used as a screensaver and on your dashboard.
   - [alpha-nvim](https://github.com/goolord/alpha-nvim)
   - [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - runs as a screen saver when no there is no activity for a specified amount of time
-- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`, `"xmas"`, `"spring"`, `"summer"`
+- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`, `"xmas"`, 
+  `"spring"`, `"summer"`, `"halloween"`
+- There are also `"auto"` themes, which set the theme depending on the current
+  month. `"auto_xmas"` activates the `"xmas"` theme in December. 
+  `"auto_halloween"` activates the `"halloweeen"` theme in October.
+  `"auto_halloween_xmas"` activates both.
+- Also, you can set your own custom theme:
+  ```lua
+  require("drop").setup({
+    theme = {
+      symbols = {"👑", "🥿"},
+      colors = {"red", "blue"}
+    }
+  })
+  ```
 
 ## ⚡️ Requirements
 
@@ -31,6 +45,14 @@ use({
     require("drop").setup()
   end,
 })
+-- lazy 
+{
+  "folke/drop.nvim",
+  event = "VimEnter",
+  config = function()
+    require("drop").setup({})
+  end,
+},
 ```
 
 ## ⚙️ Configuration

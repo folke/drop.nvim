@@ -104,6 +104,17 @@ M.themes = {
       "#ADE6B0",
     },
   },
+  halloween = {
+    symbols = { "👻", "🧛", "🧟", "🍬", "🍫" },
+    colors = {
+      "#3A3920",
+      "#807622",
+      "#EAA724",
+      "#D25B01",
+      "#5B1C02",
+      "#740819",
+    },
+  },
   summer = {
     symbols = {
       "😎",
@@ -200,9 +211,47 @@ function M.auto(buf)
   })
 end
 
+local function _auto_theme(auto_theme)
+  local current_month = os.date("*t").month
+  local xmas = false
+  local halloween = false
+  for part in string.gmatch(auto_theme, "([^_]+)") do
+    if part == "xmas" then
+      xmas = true
+    end
+    if part == "halloween" then
+      halloween = true
+    end
+  end
+  local theme = ""
+  if current_month <= 2 then
+    theme = "snow"
+  elseif current_month <= 5 then
+    theme = "spring"
+  elseif current_month <= 8 then
+    theme = "summer"
+  elseif current_month == 10 then
+    theme = "leaves"
+    if halloween then
+      theme = "halloween"
+    end
+  elseif current_month <= 11 then
+    theme = "leaves"
+  elseif current_month == 12 then
+    theme = "stars"
+    if xmas then
+      theme = "xmas"
+    end
+  end
+  return theme
+end
+
 function M.get_theme()
   local theme = M.options.theme
   if type(theme) == "string" then
+    if theme:sub(1, 4) == "auto" then
+      theme = _auto_theme(theme)
+    end
     theme = M.themes[theme]
   end
   return theme

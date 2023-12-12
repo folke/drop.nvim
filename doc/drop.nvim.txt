@@ -1,4 +1,4 @@
-*drop.nvim.txt*          For Neovim >= 0.8.0          Last change: 2023 May 24
+*drop.nvim.txt*      For Neovim >= 0.8.0          Last change: 2023 December 12
 
 ==============================================================================
 Table of Contents                                *drop.nvim-table-of-contents*
@@ -25,8 +25,22 @@ FEATURES                                             *drop.nvim-drop-features*
     - alpha-nvim <https://github.com/goolord/alpha-nvim>
     - dashboard-nvim <https://github.com/glepnir/dashboard-nvim>
 - runs as a screen saver when no there is no activity for a specified amount of time
-- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`, `"xmas"`, `"spring"`, `"summer"`
+- currently, the following themes are available: `"leaves"`, `"snow"`, `"stars"`, `"xmas"`, 
+  `"spring"`, `"summer"`, `"halloween"`
+- There are also `"auto"` themes, which set the theme depending on the current
+  month. `"auto_xmas"` activates the `"xmas"` theme in december. 
+  `"auto_halloween"` activates the `"halloweeen"` theme in october.
+  `"auto_halloween_xmas"` activates both.
+- Also, you can set your own custom theme
 
+  >
+  require("drop").setup({
+    theme = {
+      symbols = {"+","-"},
+      colors = {"red", "blue"}
+    }
+  })
+  <
 
 REQUIREMENTS                                     *drop.nvim-drop-requirements*
 
