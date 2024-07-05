@@ -1,4 +1,4 @@
-*drop.nvim.txt*          For Neovim >= 0.8.0          Last change: 2023 May 24
+*drop.nvim.txt*              For Neovim              Last change: 2024 July 05
 
 ==============================================================================
 Table of Contents                                *drop.nvim-table-of-contents*
@@ -60,7 +60,7 @@ CONFIGURATION                                   *drop.nvim-drop-configuration*
       theme = "leaves", -- can be one of rhe default themes, or a custom theme
       max = 40, -- maximum number of drops on the screen
       interval = 150, -- every 150ms we update the drops
-      screensaver = 1000  60  5, -- show after 5 minutes. Set to false, to disable
+      screensaver = 1000 * 60 * 5, -- show after 5 minutes. Set to false, to disable
       filetypes = { "dashboard", "alpha", "starter" }, -- will enable/disable automatically for the following filetypes
     }
 <
