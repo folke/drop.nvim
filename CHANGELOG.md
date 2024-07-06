@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/folke/drop.nvim/compare/v1.1.0...v1.2.0) (2024-07-06)
+
+
+### Features
+
+* **themes:** new themes and automatic theme switcher! ([#18](https://github.com/folke/drop.nvim/issues/18)) ([1bb5ce2](https://github.com/folke/drop.nvim/commit/1bb5ce2e3bef6e858a67fe72a4710b750d04ba45))
+
 ## [1.1.0](https://github.com/folke/drop.nvim/compare/v1.0.0...v1.1.0) (2023-03-12)
 
 
