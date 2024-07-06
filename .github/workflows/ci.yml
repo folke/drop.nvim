@@ -12,4 +12,3 @@ jobs:
     with:
       plugin: drop.nvim
       repo: folke/drop.nvim
-      tests: false
