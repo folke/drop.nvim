@@ -29,7 +29,10 @@ end
 
 function Drop:init()
   local theme = config.get_theme()
-  local symbols = theme.symbols
+  ---@type string[]
+  local symbols = vim.tbl_map(function(symbol)
+    return type(symbol) == "function" and symbol() or symbol
+  end, theme.symbols)
   local colors = vim.tbl_keys(theme.colors)
 
   self.symbol = symbols[math.random(1, #symbols)]

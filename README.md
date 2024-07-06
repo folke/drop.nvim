@@ -115,25 +115,29 @@ use({
 
 ```lua
 {
+
   ---@type DropTheme|string
-  theme = "leaves", -- can be one of the default themes, or a custom theme
-  holidays = { -- can be nil to disable
-    new_year = { month = 1, day = 1 }, -- accepts single day format
-    valentines_day = { month = 2, day = 14 },
-    st_patricks_day = { month = 3, day = 17 },
-    easter = require("drop").calculate_easter(year), -- helper functions for calculating complex holiday dates
-    april_fools = { month = 4, day = 1 },
-    us_independence_day = { month = 7, day = 4 },
-    halloween = { month = 10, day = 31 },
-    us_thanksgiving = require("drop").calculate_us_thanksgiving(year),
-    xmas = { -- also accepts a start/end range format
-      start_date = { month = 12, day = 24 },
-      end_date = { month = 12, day = 25 },
-    },
+  theme = "auto", -- when auto, it will choose a theme based on the date
+  ---@type ({theme: string}|DropDate|{from:DropDate, to:DropDate}|{holiday:"us_thanksgiving"|"easter"})[]
+  themes = {
+    { theme = "new_year", month = 1, day = 1 },
+    { theme = "valentines_day", month = 2, day = 14 },
+    { theme = "st_patricks_day", month = 3, day = 17 },
+    { theme = "easter", holiday = "easter" },
+    { theme = "april_fools", month = 4, day = 1 },
+    { theme = "us_independence_day", month = 7, day = 4 },
+    { theme = "halloween", month = 10, day = 31 },
+    { theme = "us_thanksgiving", holiday = "us_thanksgiving" },
+    { theme = "xmas", from = { month = 12, day = 24 }, to = { month = 12, day = 25 } },
+    { theme = "leaves", from = { month = 9, day = 22 }, to = { month = 12, day = 20 } },
+    { theme = "snow", from = { month = 12, day = 21 }, to = { month = 3, day = 19 } },
+    { theme = "spring", from = { month = 3, day = 20 }, to = { month = 6, day = 20 } },
+    { theme = "summer", from = { month = 6, day = 21 }, to = { month = 9, day = 21 } },
   },
-  max = 40, -- maximum number of drops on the screen
-  interval = 150, -- every 150ms we update the drops
+  max = 75, -- maximum number of drops on the screen
+  interval = 100, -- every 150ms we update the drops
   screensaver = 1000 * 60 * 5, -- show after 5 minutes. Set to false, to disable
-  filetypes = { "dashboard", "alpha", "starter" }, -- will enable/disable automatically for the following filetypes
+  filetypes = { "dashboard", "alpha", "ministarter" }, -- will enable/disable automatically for the following filetypes
+  winblend = 100, -- winblend for the drop window
 }
 ```
