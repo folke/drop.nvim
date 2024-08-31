@@ -115,6 +115,9 @@ function M.get_theme()
   local Util = require("drop.util")
   local themes = require("drop.themes")
   if M.options.theme ~= "auto" then
+    if type(M.options.theme) ~= "string" then
+      return M.options.theme
+    end
     return themes[M.options.theme]
   end
 
