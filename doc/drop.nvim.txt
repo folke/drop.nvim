@@ -1,4 +1,4 @@
-*drop.nvim.txt*             For Neovim             Last change: 2024 August 31
+*drop.nvim.txt*             For Neovim            Last change: 2024 October 02
 
 ==============================================================================
 Table of Contents                                *drop.nvim-table-of-contents*
@@ -64,7 +64,7 @@ Currently, the following default themes are available:
 29. **lunar**- , , , , , , , 
 30. **magical**- 
 31. **mathematical**- , , , , ≠, ≈, ∞
-32. **matrix** - 0 1 ⌘ ∑ ∆ Λ ψ ⊕ ⊖ ∴ ≡ Ω µ ∂ Φ ν
+32. **matrix** - , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -, =, , _, +, |, :, <, >, ”
 33. **medieval** - 
 34. **musical**- 
 35. **mystery**- , , , , , , 
