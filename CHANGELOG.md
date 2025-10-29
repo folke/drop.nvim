@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/folke/drop.nvim/compare/v1.2.0...v1.3.0) (2025-10-28)
+
+
+### Features
+
+* **themes:** update matrix symbols to use katakana and chars used in… ([#35](https://github.com/folke/drop.nvim/issues/35)) ([102d98a](https://github.com/folke/drop.nvim/commit/102d98af2ae91db115e1c36bf1779ac8102f6e8b))
+
+
+### Bug Fixes
+
+* **main:** allow a custom theme to be specified in options.theme ([#31](https://github.com/folke/drop.nvim/issues/31)) ([a7181be](https://github.com/folke/drop.nvim/commit/a7181be75e4167718445b7d8409a70ca63914add))
+
 ## [1.2.0](https://github.com/folke/drop.nvim/compare/v1.1.0...v1.2.0) (2024-07-06)
 
 
